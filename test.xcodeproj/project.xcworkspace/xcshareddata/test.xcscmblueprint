@@ -1,24 +1,32 @@
 {
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "92658289A15194E8917D76A4A3D01D3E60E25C9E",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
     "37b23120-c52a-4c25-9981-50db44ac9bdf++8973" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "37b23120-c52a-4c25-9981-50db44ac9bdf++8973" : 9223372036854775807
+    "37b23120-c52a-4c25-9981-50db44ac9bdf++8973" : 9223372036854775807,
+    "92658289A15194E8917D76A4A3D01D3E60E25C9E" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B8C4DC0B-C760-4C87-8FD7-E4BABACC4160",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "37b23120-c52a-4c25-9981-50db44ac9bdf++8973" : "Next\/"
+    "37b23120-c52a-4c25-9981-50db44ac9bdf++8973" : "",
+    "92658289A15194E8917D76A4A3D01D3E60E25C9E" : "TestBug\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "test",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "test\/test.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "test.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/buliceli.local",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "37b23120-c52a-4c25-9981-50db44ac9bdf++8973"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Buliceli\/testloop.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "92658289A15194E8917D76A4A3D01D3E60E25C9E"
     }
   ]
 }

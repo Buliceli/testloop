@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface CityModel : NSObject
-
+@property(nonatomic,copy)NSString* state;
+@property(nonatomic,copy)NSString* city;
+@property(nonatomic,copy)NSString* school;
 @end

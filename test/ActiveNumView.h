@@ -19,4 +19,9 @@ typedef void(^NNCodeDidChangeBlock)(NSString *codeString);
 
 /// 改变后的颜色 不设置的话是红色
 @property (nonatomic, strong) UIColor *changedColor;
+
+
+/// 输入文本框
+@property (nonatomic, strong) UITextField *codeTextField;
+
 @end

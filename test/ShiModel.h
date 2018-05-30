@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface AreaModel : NSObject
-@property(nonatomic,strong)NSArray * shi;
+#import "SchoolModel.h"
+#import "QuXianModel.h"
+@interface ShiModel : NSObject
+@property(nonatomic,strong)NSString * shiName;
+@property(nonatomic,strong)NSArray<QuXianModel*> * shiArr;
 @end

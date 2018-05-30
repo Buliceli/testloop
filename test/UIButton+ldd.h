@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UIButton (ldd)
-
+/*
+ 不生成_ld_Title
+ 不生成 ld_Title的set get
+ */
+@property NSString * ld_Title;
 @end

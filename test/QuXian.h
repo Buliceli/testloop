@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface QuXian : NSObject
-
+#import "NSObject+Prepory.h"
+@interface QuXian : NSObject<LDModel>
+@property(nonatomic,copy)NSString * name;
+//@property(nonatomic,strong)NSArray * arr;
 @end

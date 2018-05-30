@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LDButton : UIButton
-
+@property(nonatomic,copy)NSString * ldTitle;
 @end

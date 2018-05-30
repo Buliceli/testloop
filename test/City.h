@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface City : NSObject
-
+@property(nonatomic,copy)NSString * shiName;
+@property(nonatomic,strong)NSArray * shiArr;
 @end

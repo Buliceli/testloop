@@ -7,7 +7,15 @@
 //
 
 #import "FirstCity.h"
-
+//#import "NSObject+Prepory.h"
 @implementation FirstCity
++ (NSDictionary *)objectClassInArray
+{
+    return @{@"shiArr":@"QuXian"};
+}
++ (NSDictionary *)propertykeyReplacedWithValue
+{
+    return @{@"ID":@"id"};
+}
 
 @end

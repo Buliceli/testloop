@@ -8,16 +8,18 @@
 
 #import "LDAlertView0.h"
 #import "UIView+XMGExtension.h"
+#import "ActiveNumView.h"
 #define SCREEN_BOUNDS [UIScreen mainScreen].bounds
 #define SCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
-
+#define HWColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 @interface LDAlertView0 ()
 @property (nonatomic, strong) UIView       * alertV;
-@property (nonatomic, strong) UIButton     * closeBtn;
-@property (nonatomic, strong) UILabel      * ldTextLabel;
-@property (nonatomic, strong) UIImageView  * ldImageView;
-
+@property (nonatomic, strong) UILabel     * closeBtn;
+@property (nonatomic, strong) UIButton      * ldTextLabel;
+@property (nonatomic, strong) ActiveNumView  * ldImageView;
+@property(nonatomic,copy)NSString * activeStr;
+@property(nonatomic,strong)UILabel * textAlert;
 @end
 
 @implementation LDAlertView0
@@ -33,7 +35,6 @@
 - (void)show {
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
-    _alertV.transform = CGAffineTransformMakeScale(0.75, 0.75);
     _alertV.alpha = 1.0;
     _alertV.backgroundColor = HWColor(40, 40, 40);
     [UIView animateWithDuration:0.7
@@ -46,8 +47,7 @@
                          _alertV.alpha = 1.0;
                          _alertV.backgroundColor = HWColor(40, 40, 40);
                          _alertV.center = keyWindow.center;
-                         [self.ldImageView startAnimating];
-                        // [self recozerVoice];
+                         
                          
     } completion:nil];
     
@@ -62,7 +62,6 @@
     } completion:^(BOOL finished) {
         
         [self removeFromSuperview];
-        //[_iFlySpeechRecognizer cancel];
         self.hidden = YES;
         
     }];
@@ -73,59 +72,96 @@
     [self addSubview:self.alertV];
     [self.alertV addSubview:self.closeBtn];
     [self.alertV addSubview:self.ldTextLabel];
+    self.ldImageView.backgroundColor = [UIColor clearColor];
     [self.alertV addSubview:self.ldImageView];
+    self.textAlert.hidden = YES;
+    [self.alertV addSubview:self.textAlert];
 }
 
 - (UIView *)alertV {
     
     if (!_alertV) {
-        _alertV = [[UIView alloc] initWithFrame:CGRectMake(50, (SCREEN_HEIGHT-200)/2.0 + 200, SCREEN_WIDTH-100, 200)];
+        _alertV = [[UIView alloc] initWithFrame:CGRectMake(50, (SCREEN_HEIGHT-200)/2.0 + 200, SCREEN_WIDTH-50, 200)];
         _alertV.layer.cornerRadius = 5.0;
         _alertV.layer.masksToBounds = YES;
-        _alertV.backgroundColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+        _alertV.backgroundColor = [UIColor lightGrayColor];
+        _alertV.backgroundColor = [UIColor orangeColor];
     }
     return _alertV;
 }
 
-- (UIButton *)closeBtn {
+- (UILabel *)closeBtn {
     if (!_closeBtn) {
-        _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_closeBtn setFrame:CGRectMake(25, 30, 70, 50)];
-        [_closeBtn setTitle:@"Bigfish" forState:UIControlStateNormal];
-        [_closeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _closeBtn.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+        _closeBtn = [[UILabel alloc]init];
+        [_closeBtn setFrame:CGRectMake(25, 10, SCREEN_WIDTH-100-25, 50)];
+        _closeBtn.text = @"请输入激活码";
+        _closeBtn.font = [UIFont boldSystemFontOfSize:20];
+        _closeBtn.textColor = HWColor(184, 184, 184);
     }
     return _closeBtn;
 }
 
-- (UILabel *)ldTextLabel {
+- (UIButton *)ldTextLabel {
     if (!_ldTextLabel) {
-        _ldTextLabel = [[UILabel alloc]init];
-        CGFloat x = 20;
-        CGFloat y = CGRectGetMaxY(self.closeBtn.frame) + 50;
+        _ldTextLabel = [[UIButton alloc]init];
+        _ldTextLabel.showsTouchWhenHighlighted = YES;
+        CGFloat x = CGRectGetMaxX(self.alertV.frame) - 170;
+        CGFloat y = CGRectGetMaxY(self.closeBtn.frame) + 70;
         [_ldTextLabel setFrame:CGRectMake(x, y, 150, 50)];
-        _ldTextLabel.text = @"请开始说话";
-        
-        _ldTextLabel.textColor = HWColor(184, 184, 184);
-        
-        [_ldTextLabel setFont:[UIFont boldSystemFontOfSize:18]];
+        [_ldTextLabel setTitle:@"激活" forState:UIControlStateNormal];
+        _ldTextLabel.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+        [_ldTextLabel addTarget:self action:@selector(activeBtnClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _ldTextLabel;
 }
-- (UIImageView *)ldImageView {
+- (UILabel *)textAlert
+{
+    if (!_textAlert) {
+        _textAlert = [[UILabel alloc]initWithFrame:CGRectMake(20, CGRectGetMinY(self.ldTextLabel.frame), CGRectGetWidth(self.alertV.frame) - CGRectGetWidth(self.ldTextLabel.frame), 25)];
+        CGPoint point = _textAlert.center;
+        point.y = self.ldTextLabel.center.y;
+        _textAlert.center = point;
+        _textAlert.text = @"输入错误请重新输入";
+        _textAlert.textColor = [UIColor redColor];
+    }
+    return _textAlert;
+}
+/**
+ 点击了激活按钮
+ */
+- (void)activeBtnClick
+{
+    
+    NSLog(@"...%@...",self.activeStr);
+    if ([self.activeStr isEqualToString:@"1111"]) {
+        [self dismiss];
+        if (self.active) {
+            self.active();
+        }
+    }else{
+        self.activeStr = @"";
+        self.ldImageView.codeTextField.text = @"";
+        for (UIView * view in self.ldImageView.subviews) {
+            if ([view isKindOfClass:[UILabel class]]) {
+                UILabel * labl = (UILabel *)view;
+                labl.text = nil;
+            }
+        }
+        self.textAlert.hidden = NO;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.textAlert.hidden = YES;
+        });
+    }
+}
+- (ActiveNumView *)ldImageView {
     if (!_ldImageView) {
-        _ldImageView = [[UIImageView alloc]init];
-        _ldImageView.xmg_x = self.alertV.xmg_width - 90;
-        
-        _ldImageView.xmg_y = 30;
-        
-        _ldImageView.image = [UIImage imageNamed:@"voice_full"];
-        _ldImageView.animationImages = @[[UIImage imageNamed:@"voice_empty"],[UIImage imageNamed:@"voice_full"]];
-        
-        _ldImageView.animationDuration = 0.8;
-        _ldImageView.xmg_size = CGSizeMake(70, 70);
-        _ldImageView.contentMode = UIViewContentModeScaleAspectFit;
-       
+        CGFloat distance = ((SCREEN_WIDTH-50) - 40 * 4) / (4+1);
+        _ldImageView = [[ActiveNumView alloc]initWithFrame:CGRectMake(0, 70, SCREEN_WIDTH-50, 40) andLabelCount:4 andLabelDistance:distance isCircle:NO];
+        __weak typeof(self) weakSelf = self;
+        _ldImageView.codeBlock = ^(NSString *codeString) {
+            
+            weakSelf.activeStr = codeString;
+        };
    }
     return _ldImageView;
 }
@@ -142,9 +178,9 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self dismiss];
-    //UI消失时 停止讯飞的录音
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"lddAlertDismiss" object:nil];
+   // [self dismiss];
+    [self endEditing:YES];
+    
 }
 
 

@@ -1,0 +1,265 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="css/login_chinese.css" rel="stylesheet" type="text/css">
+    <title>语音系统登录</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script language="javascript">
+        function getCity() {
+            $.ajax({
+                type : "post",
+                scriptCharset:"utf-8",
+                url : "getcity.jsp",    //url根据自己的项目实际定义
+                async : false,
+                dataType : "text",
+                error : function() {
+                    alert("系统忙，请稍后再试！");
+                    return false;
+                },
+                success : function(text) {
+                    var city = $("#city");
+                    var str = '';
+                    alert(text);
+                    var data = eval("("+text+")") ;
+
+                    for(var o in data) {
+                        str = str + '<option value="'+data[o].name + '">' + data[o].code + '</option>' ;
+                    }
+                    city.append(str);
+                }
+            });
+
+        }
+
+        function getCity2(strState) {
+            document.all("selectstate").value = strState ;
+            document.all("selectcity").value = "-1" ;
+            document.all("selectschool").value = "-1" ;
+            //alert("getcity.jsp?state="+strState) ;
+            //alert(encodeURI("getcity.jsp?state="+strState)) ;
+            //alert(encodeURI(encodeURI("getcity.jsp?state="+strState))) ;
+            $.ajax({
+                type : "post",
+                scriptCharset:"utf-8",
+                url : encodeURI("getcity.jsp?state="+strState),    //url根据自己的项目实际定义
+                async : false,
+                dataType : "text",
+                error : function() {
+                    alert("系统忙，请稍后再试！");
+                    return false;
+                },
+                success : function(text) {
+                    $("#city").empty();
+                    var city = $("#city");
+                    var str = '';
+                    //alert(text);
+                    var data = eval("("+text+")") ;
+
+                    for(var o in data) {
+                        str = str + '<option value="'+data[o].name + '">' + data[o].code + '</option>' ;
+                    }
+                    city.append("<option value=\"-1\">--请选择区县--</option>") ;
+                    city.append(str);
+
+                    $("#school").empty();
+                    var school = $("#school");
+                    school.append("<option value=\"-1\">--请选择学校--</option>") ;
+
+                }
+            });
+
+        }
+
+        function getSchool(strCity) {
+//alert(document.all("selectstate").value);
+            document.all("selectcity").value = strCity ;
+            $.ajax({
+                type : "post",
+                scriptCharset:"utf-8",
+                url : encodeURI("getschool.jsp?city="+strCity+"&state="+document.all("selectstate").value),    //url根据自己的项目实际定义
+                async : false,
+                dataType : "text",
+                error : function() {
+                    alert("系统忙，请稍后再试！");
+                    return false;
+                },
+                success : function(text) {
+                    $("#school").empty();
+                    var school = $("#school");
+                    var str = '';
+                    //alert(text);
+                    var data = eval("("+text+")") ;
+
+                    for(var o in data) {
+                        str = str + '<option value="'+data[o].name + '">' + data[o].code + '</option>' ;
+                    }
+                    school.append("<option value=\"-1\">--请选择学校--</option>") ;
+                    school.append(str);
+                }
+            });
+
+        }
+
+        function selectSchool(strSchool) {
+//alert(document.all("selectstate").value);
+            document.all("selectschool").value = strSchool ;
+        }
+
+        function submitdata(){
+//alert("1") ;
+//    if(document.regForm.existuser.value>0){
+//        return false ;
+//    }
+
+            var webValue = "" ;
+            var turnWeb = "" ;
+            var LB = "\n";
+            var msg ="";
+            var msg1 = "";
+            //document.register.userid.value = document.register.userid.value.trim();
+            if (document.regForm.userid.value.length ==0) {
+                msg += LB + "用户名";
+            }else{
+                //var b = /^[0-9a-zA-Z]*$/g;
+                objUserid = document.regForm.userid.value.match( /^[0-9a-zA-Z]*$/g);
+                if(objUserid==null){
+                    msg += LB + "用户名必须是数字、字母或者数字字母组合";
+                }
+            }
+
+            if (document.regForm.username.value.length ==0) {
+                msg += LB + "真实姓名";
+            }else{
+                obj=document.regForm.username.value.match(/^[\u4e00-\u9fa5]*$/g);
+                if(obj==null)
+                {
+                    msg += LB + "真实姓名必须为中文";
+                }
+            }
+            if (document.all("selectschool").value<1) {msg += LB + "选择学校";}
+
+            if (document.regForm.passwd.value.length ==0) {
+                msg += LB + "密码";
+            }else{
+                objPassword = document.regForm.passwd.value.match( /^[0-9a-zA-Z]*$/g);
+                if(objPassword==null){
+                    msg += LB + "密码必须是数字、字母或者数字字母组合";
+                }else{
+                    if(document.regForm.passwd.value.length>16){
+                        msg += LB + "密码不能超过16位";
+                    }
+                    if(document.regForm.passwd.value.length<6){
+                        msg += LB + "密码不能少于6位";
+                    }
+                }
+            }
+            if (document.regForm.conpasswd.value.length ==0) {
+                msg += LB + "密码确认";
+            }
+
+            if (!(document.regForm.passwd.value==document.regForm.conpasswd.value))
+            {
+                msg1 = "密码和密码确认不一致:" + LB;
+            }
+
+            //alert("1");
+            if( msg.length > 0 ){
+                msg = "请按要求输入:"  + msg ;
+            }
+            if (msg.length > 0 || msg1.length > 0 )
+            {
+                alert( msg + LB + msg1 );
+                return false;
+            }
+            else
+            {
+                document.regForm.submit();
+                return true;
+            }
+
+        }
+    </script></head>
+
+<body>
+<form class="user_c" method="post" target="_top" name="regForm" action="regresult.jsp">
+    <div class="main">
+        <div class="banner">
+            <div class="yuyinlogo"><img src="images/login/yuyinlogo.png" height="70"></div>
+        </div>
+        <div class="content0">
+            <div class="box">
+                <div class="title">新生注册<!--<a class="right" href="javascript:window.close()"> <font size="4">×</font> </a>--><a class="right" href="login.jsp">返回</a></div>
+                <div class="line"><font color="red" size="2">&nbsp;&nbsp;&nbsp;&nbsp;说明： 用户名为4-16位字符(字母、数字组合)，设置后不可更改<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码为8-16位字母、数字组合</font></div>
+                <div class="line"><label>用户名:</label> <input name="userid" type="text" class="input0">*</div>
+                <div class="line"><label>身份证号:</label> <input name="idcard" type="text" class="input0"></div>
+                <div class="line"><label>学籍辅号:</label> <input name="snumber" type="text" class="input0"></div>
+                <div class="line"><label>姓名:</label> <input name="username" type="text" class="input0">*</div>
+                <div class="line"><label>地市:</label>
+                    <select name="state" id="state" style="WIDTH:115px" onchange="javascript:getCity2(this.value);">
+                        <option value="-1">--请选择地市--</option>
+                        <option value="南京市">南京市</option>
+                        <option value="无锡市">无锡市</option>
+                        <option value="徐州市">徐州市</option>
+                        <option value="常州市">常州市</option>
+                        <option value="苏州市">苏州市</option>
+                        <option value="南通市">南通市</option>
+                        <option value="连云港市">连云港市</option>
+                        <option value="淮安市">淮安市</option>
+                        <option value="盐城市">盐城市</option>
+                        <option value="扬州市">扬州市</option>
+                        <option value="镇江市">镇江市</option>
+                        <option value="泰州市">泰州市</option>
+                        <option value="宿迁市">宿迁市</option>
+                    </select>*
+                    <label class="la2">区县:</label>
+                    <select name="city" id="city" style="WIDTH:115px" onchange="javascript:getSchool(this.value);"><option value="-1">--请选择区县--</option><option value="泗阳县">泗阳县</option><option value="沭阳县">沭阳县</option><option value="宿豫区">宿豫区</option><option value="湖滨新区">湖滨新区</option><option value="经济开发区">经济开发区</option><option value="宿城区">宿城区</option><option value="洋河新城">洋河新城</option><option value="泗洪县">泗洪县</option><option value="直属学校">直属学校</option></select>*</div>
+                <div class="line"><label>学校:</label>
+                    <select name="school" id="school" style="WIDTH:198px" onchange="javascript:selectSchool(this.value);"><option value="-1">--请选择学校--</option><option value="宿迁市钟吾国际学校">宿迁市钟吾国际学校</option><option value="宿迁市实验">宿迁市实验</option><option value="宿迁市钟吾初级中学">宿迁市钟吾初级中学</option></select>*
+                </div>
+                <div class="line"><label>年级:</label>
+                    <select name="grade">
+                        <option value="X2017">一年级</option>
+                        <option value="C2017">七年级</option></select>*
+                    <label class="la2">班级:</label>
+                    <select name="class">
+                        <option value="01">1班</option>
+                        <option value="02">2班</option>
+                        <option value="03">3班</option>
+                        <option value="04">4班</option>
+                        <option value="05">5班</option>
+                        <option value="06">6班</option>
+                        <option value="07">7班</option>
+                        <option value="08">8班</option>
+                        <option value="09">9班</option>
+                        <option value="10">10班</option>
+                        <option value="11">11班</option>
+                        <option value="12">12班</option>
+                        <option value="13">13班</option>
+                        <option value="14">14班</option>
+                        <option value="15">15班</option>
+                        <option value="16">16班</option>
+                        <option value="17">17班</option>
+                        <option value="18">18班</option>
+                        <option value="19">19班</option>
+                        <option value="20">20班</option></select>*</div>
+                <div class="line"><label>密码:</label> <input name="passwd" type="password" class="input0">*</div>
+                <div class="line"><label>确认密码:</label> <input name="conpasswd" type="password" class="input0">*</div>
+                <div class="getin_button"><a href="#;return false" onclick="javascript:submitdata();">提   交</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer" style="padding:0;">
+        <br>
+        <p>主管：江苏省教育厅&nbsp;&nbsp;主办:江苏省电化教育馆</p>
+        <p>承办:江苏省视听教育技术服务有限公司&nbsp;&nbsp;北京华夏博新教育软件有限公司 　</p>
+        <p>服务热线025-83752147、83752060、83752061（工作时间为8：30-11：30，14：00-17：30，节假日除外）</p>
+        <p><a href="http://www.miitbeian.gov.cn">苏ICP备15033666号-1</a>&nbsp;&nbsp;&nbsp;&nbsp;建议使用IE浏览器访问本系统</p>
+    </div>
+
+    <input type="hidden" id="selectstate" name="selectstate" value="宿迁市">
+    <input type="hidden" id="selectcity" name="selectcity" value="直属学校">
+    <input type="hidden" id="selectschool" name="selectschool" value="-1">
+    <input type="hidden" id="existuser" name="existuser" value="-1">
+</form>
+
+
+</body></html>

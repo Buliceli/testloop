@@ -6,8 +6,13 @@
 //  Copyright © 2017年 Minte. All rights reserved.
 //
 
-#import "AreaModel.h"
-
-@implementation AreaModel
-
+#import "ShiModel.h"
+#import "MJExtension.h"
+@implementation ShiModel
++ (NSDictionary*)mj_objectClassInArray
+{
+    return @{
+             @"shiArr":@"QuXianModel"
+             };
+}
 @end

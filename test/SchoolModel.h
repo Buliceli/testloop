@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface SchoolModel : NSObject
-
+@property(nonatomic,copy)NSString* schoolName;
 @end

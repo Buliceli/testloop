@@ -7,16 +7,32 @@
 //
 
 #import "AppDelegate.h"
-
+#import "TestController.h"
+#import "RegisterController.h"
+#import "BuliceliController.h"
+#import "LDController.h"
+#import "RunController.h"
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
+int a = 10;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+//    self.window.rootViewController =[[RegisterController alloc]init];
+#if 1
+    self.window.rootViewController =[[TestController alloc]init];
+#endif
+#if 0
+    self.window.rootViewController =[[BuliceliController alloc]init];
+#endif
+   // self.window.rootViewController =[[LDController alloc]init];
+  // self.window.rootViewController =[[RunController alloc]init];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

@@ -9,5 +9,8 @@
 #import "LDThred.h"
 
 @implementation LDThred
-
+- (void)dealloc
+{
+    NSLog(@"线程销毁...");
+}
 @end

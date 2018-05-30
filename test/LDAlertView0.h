@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void (^activeSuccess)();
 @interface LDAlertView0 : UIView
-
+@property(nonatomic,copy)activeSuccess active;
 - (void)show;
 - (void)dismiss;
 @end

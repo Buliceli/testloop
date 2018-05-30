@@ -7,7 +7,12 @@
 //
 
 #import "QuXianModel.h"
-
+#import "MJExtension.h"
 @implementation QuXianModel
-
++ (NSDictionary*)mj_objectClassInArray
+{
+    return @{
+             @"arr":@"SchoolModel"
+             };
+}
 @end

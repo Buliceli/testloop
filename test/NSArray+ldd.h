@@ -7,7 +7,7 @@
 //
 
 
-
+#import <Foundation/Foundation.h>
 @interface NSArray (ldd)
 
 @end

@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Manager : NSObject
+@protocol ManagerProtocol <NSObject>
+- (void)buyMood;
+@end
+@interface Manager : NSObject<ManagerProtocol>
 
 @end

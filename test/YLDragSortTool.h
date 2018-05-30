@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface YLDragSortTool : NSObject
-
+@property (nonatomic,assign) BOOL isEditing;
+@property (nonatomic,strong) NSMutableArray * subscribeArray;
++ (instancetype)shareInstance;
 @end

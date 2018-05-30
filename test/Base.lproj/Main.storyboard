@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--TwoVC-->
+        <!--Two Controller-->
         <scene sceneID="LXi-Uh-yk0">
             <objects>
                 <viewController id="ZQW-80-B84" customClass="TwoController" sceneMemberID="viewController">
@@ -20,25 +20,14 @@
                     <view key="view" contentMode="scaleToFill" id="moi-Gs-XkZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Km-4O-eld">
-                                <rect key="frame" x="137" y="187" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="btnClick:" destination="ZQW-80-B84" eventType="touchUpInside" id="Kzc-wd-LeB"/>
-                                </connections>
-                            </button>
-                        </subviews>
                     </view>
-                    <tabBarItem key="tabBarItem" title="TwoVC" id="dzU-9J-d4i"/>
+                    <navigationItem key="navigationItem" id="afy-1E-jrp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9f5-Wy-5yN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-295" y="20"/>
+            <point key="canvasLocation" x="689" y="12"/>
         </scene>
-        <!--OneVC-->
+        <!--One Controller-->
         <scene sceneID="3f0-3c-On7">
             <objects>
                 <viewController id="VIr-0g-Go8" customClass="OneController" sceneMemberID="viewController">
@@ -50,11 +39,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="OneVC" id="V32-FO-y4k"/>
+                    <navigationItem key="navigationItem" id="sUV-uM-sBW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nU6-Z5-nrr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-398" y="-617"/>
+            <point key="canvasLocation" x="688.79999999999995" y="-641.82908545727139"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="CIV-1Y-y1F">
@@ -66,13 +55,51 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="VIr-0g-Go8" kind="relationship" relationship="viewControllers" id="UHV-Z8-OV7"/>
-                        <segue destination="ZQW-80-B84" kind="relationship" relationship="viewControllers" id="SJv-BP-bTL"/>
+                        <segue destination="D9M-kM-a7X" kind="relationship" relationship="viewControllers" id="UHV-Z8-OV7"/>
+                        <segue destination="RTc-hA-J38" kind="relationship" relationship="viewControllers" id="SJv-BP-bTL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RMz-vo-dpX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1191" y="-179"/>
+        </scene>
+        <!--TwoVC-->
+        <scene sceneID="tjJ-2h-6EU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RTc-hA-J38" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="TwoVC" id="dzU-9J-d4i"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Y0E-cb-lII">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZQW-80-B84" kind="relationship" relationship="rootViewController" id="0xh-vC-ZcW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="76c-Mu-8CL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-250" y="13"/>
+        </scene>
+        <!--OneVC-->
+        <scene sceneID="bLK-gu-5pL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D9M-kM-a7X" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="OneVC" id="V32-FO-y4k"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yLb-TZ-n4z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VIr-0g-Go8" kind="relationship" relationship="rootViewController" id="ptO-Cm-QsL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Acb-PI-GJr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-250.40000000000001" y="-641.82908545727139"/>
         </scene>
     </scenes>
 </document>

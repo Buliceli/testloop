@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SchoolModel.h"
 @interface QuXianModel : NSObject
-
+@property(nonatomic,copy)NSString* name;
+//@property(nonatomic,strong)SchoolModel * school;
+@property(nonatomic,strong)NSArray<SchoolModel*> * arr;
 @end

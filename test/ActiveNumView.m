@@ -15,8 +15,7 @@
 @property (nonatomic, assign) NSInteger labelCount;
 /// label 之间的距离
 @property (nonatomic, assign) CGFloat labelDistance;
-/// 输入文本框
-@property (nonatomic, strong) UITextField *codeTextField;
+
 
 @property (nonatomic,assign)BOOL isCircle;
 @end
@@ -29,7 +28,7 @@
         self.backgroundColor = [UIColor whiteColor];
         self.labelCount = labelCount;
         self.labelDistance = labelDistance;
-        self.changedColor = [UIColor redColor];
+        self.changedColor = [UIColor blackColor];
         self.defaultColor = [UIColor blackColor];
         if (isCirce) {
             self.isCircle = YES;
@@ -44,14 +43,16 @@
     CGFloat labelY = 0;
     CGFloat labelWidth = self.codeTextField.frame.size.width / self.labelCount;
     CGFloat sideLength = labelWidth < self.frame.size.height ? labelWidth : self.frame.size.height;
+    
     for (int i = 0; i < self.labelCount; i++) {
         if (i == 0) {
-            labelX = 0;
+            labelX = 0 + self.labelDistance;
         } else {
-            labelX = i * (sideLength + self.labelDistance);
+            labelX = i * (sideLength + self.labelDistance) + self.labelDistance;
         }
+        
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(labelX, labelY, sideLength - 1, sideLength - 1)];
-        //label.backgroundColor = [UIColor cyanColor];
+        
         [self addSubview:label];
         label.textAlignment = NSTextAlignmentCenter;
         label.layer.borderColor = [UIColor blackColor].CGColor;

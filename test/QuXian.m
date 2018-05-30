@@ -9,5 +9,8 @@
 #import "QuXian.h"
 
 @implementation QuXian
-
++ (NSDictionary *)propertykeyReplacedWithValue
+{
+    return @{@"arr":@"School"};
+}
 @end
