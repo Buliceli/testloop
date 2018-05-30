@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>shiArr</key>
+	<array>
+		<dict>
+			<key>arr</key>
+			<array>
+				<dict>
+					<key>schoolName</key>
+					<string>高淳_第一小学</string>
+				</dict>
+				<dict>
+					<key>schoolName</key>
+					<string>高淳_第二小学</string>
+				</dict>
+			</array>
+			<key>name</key>
+			<string>高淳区</string>
+		</dict>
+		<dict>
+			<key>arr</key>
+			<array>
+				<dict>
+					<key>schoolName</key>
+					<string>江宁_第一小学</string>
+				</dict>
+				<dict>
+					<key>schoolName</key>
+					<string>江宁_第二小学</string>
+				</dict>
+			</array>
+			<key>name</key>
+			<string>江宁区</string>
+		</dict>
+	</array>
+	<key>shiName</key>
+	<string>南京市</string>
+</dict>
+</plist>
